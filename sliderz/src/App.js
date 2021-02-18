@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 
 const useStyles = makeStyles({
@@ -15,36 +14,33 @@ function valuetext(value) {
 
 export default function RangeSlider() {
   const classes = useStyles();
-
-  const [value, setValue] = React.useState([4, 7]);
+  const [value, setValue] = React.useState([0, 10]);
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    const maxDiff = 1;
+    const min = newValue[0], max = newValue[1];
+    const diff = max - min;
+
+    // const diff = +parseFloat(max - min).toFixed(2);
+
+    console.log(min, max, diff);
+    if (diff >= maxDiff) {
+      setValue(newValue);
+    }
   };
 
   return (
-    
     <div className={classes.root}>
-      
-     
-
-      
-      
-      <Typography id="range-slider" gutterBottom>
-        Temperature range
-      </Typography>
+      <h1>Task1.1</h1>
       <Slider
-        min={0}
-        max={10}
         value={value}
         onChange={handleChange}
-        valueLabelDisplay="auto"
-        aria-labelledby="range-slider"
+        step={0.01}
+        min={0}
+        max={10}
+        valueLabelDisplay="on"
         getAriaValueText={valuetext}
       />
     </div>
-      
   );
 }
-
-
